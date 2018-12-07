@@ -2,6 +2,7 @@
 class SolrDocument
   include Blacklight::Solr::Document
   include Arclight::SolrDocument
+  include Pulfa::SolrDocument
 
   # self.unique_key = 'id'
 
