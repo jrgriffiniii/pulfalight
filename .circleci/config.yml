@@ -127,7 +127,7 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:migrate
       - run: bundle exec rake db:migrate RAILS_ENV=test
-      # Lint
+      # Test
       - run:
           name: Run Rspec
           command: bundle exec rspec
