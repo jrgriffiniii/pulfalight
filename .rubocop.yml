@@ -15,21 +15,30 @@ AllCops:
 Metrics/AbcSize:
   Exclude:
     - 'app/services/tree_navigation_service.rb'
+    - 'lib/pulfalight/traject/ead2_config.rb'
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - 'lib/tasks/**/*'
     - 'app/controllers/catalog_controller.rb'
     - 'config/routes.rb'
-Metrics/MethodLength:
+Metrics/CyclomaticComplexity:
   Exclude:
-    - 'lib/tasks/pulfalight.rake'
-    - 'app/services/tree_navigation_service.rb'
+    - 'lib/pulfalight/traject/ead2_config.rb'
 Metrics/ExampleLength:
   Exclude:
     - 'lib/tasks/plantain.rake'
     - 'app/services/tree_navigation_service.rb'
     - 'spec/features/traject/ead2_indexing_spec.rb'
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/tasks/pulfalight.rake'
+    - 'app/services/tree_navigation_service.rb'
+    - 'lib/pulfalight/traject/ead2_config.rb'
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'lib/pulfalight/traject/ead2_config.rb'
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 RSpec/VerifiedDoubles:
