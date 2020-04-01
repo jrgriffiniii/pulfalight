@@ -5,6 +5,25 @@
 require "rails_helper"
 
 describe "EAD 2 traject indexing", type: :feature do
+  context "with nested components in a collection" do
+    let(:fixture_path) do
+      Rails.root.join("spec", "fixtures", "ead", "mudd", "publicpolicy", "MC221.EAD.xml")
+    end
+
+    it "indexes child components for the collection components" do
+      components = result["components"]
+      parent_components = components.select { |c| c["components"] }
+      expect(parent_components).not_to be_empty
+      parent_component = parent_components.first
+      child_components = parent_component["components"]
+      expect(child_components.length).to eq(52)
+      child_component = child_components.first
+      expect(child_component).to include("id" => ["MC221_c0002"])
+      expect(child_component).to include("component_level_isim" => [2])
+      expect(child_component).to include("level_ssm" => ["File"])
+    end
+  end
+
   subject(:result) do
     indexer.map_record(record)
   end
