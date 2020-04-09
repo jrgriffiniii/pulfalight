@@ -102,7 +102,9 @@ jobs:
           # POSTGRES_PASSWORD: ""
           POSTGRES_HOST_AUTH_METHOD: trust
       - image: solr:8.4.1
-        command: bin/solr -cloud -noprompt -f -p 8984
+        name: solr
+        command:
+          - bin/solr -cloud -noprompt -f -p 8984
     steps:
       - attach_workspace:
           at: '~/pulfalight'
@@ -110,7 +112,11 @@ jobs:
       - run:
           name: Wait for PostgreSQL
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
+      - run:
+          name: Create the configset and collection in Solr
+          command: |
+            docker cp $PWD/solr/conf /opt/solr/server/solr/configsets/pulfalight:ro
+            docker exec solr solr-precreate pulfalight-core-test /opt/solr/server/solr/configsets/pulfalight
       - run:
           name: Update bundler
           command: |
